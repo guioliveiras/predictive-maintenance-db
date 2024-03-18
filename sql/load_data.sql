@@ -1,52 +1,52 @@
-drop schema if exists kaggle cascade;
+-- Drop schema e criação
+DROP SCHEMA IF EXISTS kaggle CASCADE;
+CREATE SCHEMA IF NOT EXISTS kaggle;
 
-create schema if not exists kaggle;
-
--- Criando a tabela machines
-create table kaggle.machines (
-	machineID smallint primary key,
-	model varchar(10) not null,
-	age int not null
+-- Criando a tabela "machines"
+CREATE TABLE kaggle.machines (
+    machineID SMALLINT PRIMARY KEY,
+    model VARCHAR(10) NOT NULL,
+    age INT NOT NULL
 );
 
--- Criando a tabela errors
-create table kaggle.errors (
-	error_id serial primary key,
-	datetime timestamp not null,
-	machineID int references kaggle.machines(machineID) not null,
-	errorID varchar not null
+-- Criando a tabela "errors"
+CREATE TABLE kaggle.errors (
+	error_id SMALLINT PRIMARY KEY,
+	datetime TIMESTAMP NOT NULL,
+	machineID SMALLINT REFERENCES kaggle.machines(machineID) NOT NULL,
+	errorID VARCHAR NOT NULL
 );
 
--- Criando a tabela failures
-create table kaggle.failures(
-	failure_id serial primary key,
-	datetime timestamp not null,
-	machineID int references kaggle.machines(machineID) not null,
-	failure varchar(10) not null
+-- Criando a tabela "failures"
+CREATE TABLE kaggle.failures (
+    failure_id SERIAL PRIMARY KEY,
+    datetime TIMESTAMP NOT NULL,
+    machineID INT REFERENCES kaggle.machines(machineID) NOT NULL,
+    failure VARCHAR(10) NOT NULL
 );
 
--- Criando a tabela maint
-create table kaggle.maint(
-	maint_id serial primary key,
-	datetime timestamp not null,
-	machineID int references kaggle.machines(machineID) not null,
-	component varchar(10) not null
+-- Criando a tabela "maint"
+CREATE TABLE kaggle.maint (
+    maint_id SERIAL PRIMARY KEY,
+    datetime TIMESTAMP NOT NULL,
+    machineID INT REFERENCES kaggle.machines(machineID) NOT NULL,
+    component VARCHAR(10) NOT NULL
 );
 
--- Criando a tabela telemetry
-create table kaggle.telemetry(
-	datetime timestamp,
-	machineID int references kaggle.machines(machineID),
-	volt float not null,
-	rotate float not null,
-	pressure float not null,
-	vibration float not null,
-	primary key (machineID, datetime)
+-- Criando a tabela "telemetry"
+CREATE TABLE kaggle.telemetry (
+    datetime TIMESTAMP,
+    machineID INT REFERENCES kaggle.machines(machineID),
+    volt FLOAT NOT NULL,
+    rotate FLOAT NOT NULL,
+    pressure FLOAT NOT NULL,
+    vibration FLOAT NOT NULL,
+    PRIMARY KEY (machineID, datetime)
 );
 
 -- Copiando os dados dos arquivos para as tabelas.
-\COPY kaggle.machines FROM 'C:\Users\Guilherme\OneDrive\Documentos\projects\predictive-maintenance-db\data\PdM_machines.csv' DELIMITER ',' CSV HEADER;
-\COPY kaggle.errors (datetime, machineID, errorID) FROM 'C:\Users\Guilherme\OneDrive\Documentos\projects\predictive-maintenance-db\data\PdM_errors.csv' DELIMITER ',' CSV HEADER;
-\COPY kaggle.failures (datetime, machineID, failure) FROM 'C:\Users\Guilherme\OneDrive\Documentos\projects\predictive-maintenance-db\data\PdM_failures.csv' DELIMITER ',' CSV HEADER;
-\COPY kaggle.maint (datetime, machineID, component) FROM 'C:\Users\Guilherme\OneDrive\Documentos\projects\predictive-maintenance-db\data\PdM_maint.csv' DELIMITER ',' CSV HEADER;
-\COPY kaggle.telemetry  FROM 'C:\Users\Guilherme\OneDrive\Documentos\projects\predictive-maintenance-db\data\PdM_telemetry.csv' DELIMITER ',' CSV HEADER;
+COPY kaggle.machines FROM 'C:\Users\Guilherme\OneDrive\Documentos\projects\predictive-maintenance-db\data\PdM_machines.csv' DELIMITER ',' CSV HEADER;
+COPY kaggle.errors (datetime, machineID, errorID) FROM 'C:\Users\Guilherme\OneDrive\Documentos\projects\predictive-maintenance-db\data\PdM_errors.csv' DELIMITER ',' CSV HEADER;
+COPY kaggle.failures (datetime, machineID, failure) FROM 'C:\Users\Guilherme\OneDrive\Documentos\projects\predictive-maintenance-db\data\PdM_failures.csv' DELIMITER ',' CSV HEADER;
+COPY kaggle.maint (datetime, machineID, component) FROM 'C:\Users\Guilherme\OneDrive\Documentos\projects\predictive-maintenance-db\data\PdM_maint.csv' DELIMITER ',' CSV HEADER;
+COPY kaggle.telemetry  FROM 'C:\Users\Guilherme\OneDrive\Documentos\projects\predictive-maintenance-db\data\PdM_telemetry.csv' DELIMITER ',' CSV HEADER;

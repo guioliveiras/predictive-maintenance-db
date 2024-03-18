@@ -1,171 +1,133 @@
-drop schema if exists maintenance_data cascade;
+-- Drop schema e criação
+DROP SCHEMA IF EXISTS maintenance_data CASCADE;
+CREATE SCHEMA maintenance_data;
 
-create schema maintenance_data;
-
--- components
-create table maintenance_data.components (
-	component_key smallserial primary key,
-	component_name varchar(10)
+-- Criação da tabela "components"
+CREATE TABLE maintenance_data.components (
+    component_key SMALLSERIAL PRIMARY KEY,
+    component_name VARCHAR(10)
 );
 
-insert into maintenance_data.components (component_name)
-select distinct failure from kaggle.failures order by failure;
+-- Inserção de dados na tabela "components"
+INSERT INTO maintenance_data.components (component_name)
+SELECT DISTINCT failure FROM kaggle.failures ORDER BY failure;
 
--- component-failure
-create table maintenance_data.failures as (
-select 
-failure_id,
-datetime,
-machineid,
-c.component_key
-from kaggle.failures f 
-left join maintenance_data.components c
-on f.failure = c.component_name
+-- Criação da tabela "failures"
+CREATE TABLE maintenance_data.failures AS (
+    SELECT 
+        failure_id,
+        datetime,
+        machineid,
+        c.component_key
+    FROM kaggle.failures f 
+    LEFT JOIN maintenance_data.components c ON f.failure = c.component_name
 );
 
--- primary key
-alter table maintenance_data.failures 
-add constraint pk_failure_id
-primary key(failure_id);
+-- Definição de chaves primárias e estrangeiras para a tabela "failures"
+ALTER TABLE maintenance_data.failures 
+    ADD CONSTRAINT pk_failure_id PRIMARY KEY(failure_id),
+    ADD CONSTRAINT fk_component_key FOREIGN KEY (component_key) REFERENCES maintenance_data.components(component_key);
 
--- component_fk
-alter table maintenance_data.failures 
-add constraint fk_component_key
-foreign key (component_key)
-references maintenance_data.components(component_key);
-
--- component-maint
-create table maintenance_data.maint as (
-select 
-maint_id,
-datetime,
-machineid as machine_id,
-c.component_key 
-from kaggle.maint m 
-left join maintenance_data.components c 
-	on c.component_name = m.component 
+-- Criação da tabela "maint"
+CREATE TABLE maintenance_data.maint AS (
+    SELECT 
+        maint_id,
+        datetime,
+        machineid AS machine_id,
+        c.component_key 
+    FROM kaggle.maint m 
+    LEFT JOIN maintenance_data.components c ON c.component_name = m.component 
 );
 
--- primary-key
-alter table maintenance_data.maint 
-add constraint pk_maint_id
-primary key(maint_id);
+-- Definição de chaves primárias e estrangeiras para a tabela "maint"
+ALTER TABLE maintenance_data.maint 
+    ADD CONSTRAINT pk_maint_id PRIMARY KEY(maint_id),
+    ADD CONSTRAINT fk_component_key FOREIGN KEY (component_key) REFERENCES maintenance_data.components(component_key);
 
-
--- component-fk
-alter table maintenance_data.maint 
-add constraint fk_component_key
-foreign key (component_key)
-references maintenance_data.components(component_key);
-
--- errors
-create table maintenance_data.error (
-	error_key serial primary key,
-	error_id varchar(10)
+-- Criação da tabela "error"
+CREATE TABLE maintenance_data.error (
+    error_key SERIAL PRIMARY KEY,
+    error_id VARCHAR(10)
 );
 
-insert into maintenance_data.error (error_id)
-select distinct errorid  from kaggle.errors order by errorid;
+-- Inserção de dados na tabela "error"
+INSERT INTO maintenance_data.error (error_id)
+SELECT DISTINCT errorid FROM kaggle.errors ORDER BY errorid;
 
--- error-machine
-create table maintenance_data.error_machine as (
-select 
-em.error_id as error_machine_id,
-em.datetime,
-em.machineid as machine_id,
-e.error_key
-from kaggle.errors em 
-left join maintenance_data.error e 
-	on em.errorid  = e.error_id 
+-- Criação da tabela "error_machine"
+CREATE TABLE maintenance_data.error_machine AS (
+    SELECT 
+        em.error_id AS error_machine_id,
+        em.datetime,
+        em.machineid AS machine_id,
+        e.error_key
+    FROM kaggle.errors em 
+    LEFT JOIN maintenance_data.error e ON em.errorid  = e.error_id 
 );
 
--- error-machine-pk
-alter table maintenance_data.error_machine 
-add constraint pk_error_machine_id
-primary key(error_machine_id);
+-- Definição de chaves primárias e estrangeiras para a tabela "error_machine"
+ALTER TABLE maintenance_data.error_machine 
+    ADD CONSTRAINT pk_error_machine_id PRIMARY KEY(error_machine_id),
+    ADD CONSTRAINT fk_error_key FOREIGN KEY (error_key) REFERENCES maintenance_data.error(error_key);
 
--- error-key-fk
-alter table maintenance_data.error_machine 
-add constraint fk_error_key
-foreign key (error_key)
-references maintenance_data.error(error_key);
-
-
--- models
-create table maintenance_data.models (
-	model_id smallserial primary key,
-	model varchar(10) not null
+-- Criação da tabela "models"
+CREATE TABLE maintenance_data.models (
+    model_id SMALLSERIAL PRIMARY KEY,
+    model VARCHAR(10) NOT NULL
 );
 
+-- Inserção de dados na tabela "models"
+INSERT INTO maintenance_data.models (model)
+SELECT DISTINCT model FROM kaggle.machines ORDER BY model;
 
-insert into maintenance_data.models (model)
-select distinct model from kaggle.machines order by model;
-
-
--- machine
-create table maintenance_data.machine  as (
-select 
-m.machineid as machine_id,
-mds.model_id,
-2024 - m.age as manufacture_year
-from kaggle.machines m 
-left join maintenance_data.models mds
-	on mds.model = m.model
+-- Criação da tabela "machine"
+CREATE TABLE maintenance_data.machine AS (
+    SELECT 
+        m.machineid AS machine_id,
+        mds.model_id,
+        2024 - m.age AS manufacture_year
+    FROM kaggle.machines m 
+    LEFT JOIN maintenance_data.models mds ON mds.model = m.model
 );
 
--- machine-pk
-alter table maintenance_data.machine 
-add constraint pk_machine_id
-primary key (machine_id);
+-- Definição de chaves primárias e estrangeiras para a tabela "machine"
+ALTER TABLE maintenance_data.machine 
+    ADD CONSTRAINT pk_machine_id PRIMARY KEY (machine_id),
+    ADD CONSTRAINT fk_model_id FOREIGN KEY (model_id) REFERENCES maintenance_data.models(model_id);
 
--- model-fk
-alter table maintenance_data.machine
-add constraint fk_model_id
-foreign key (model_id)
-references maintenance_data.models(model_id);
+-- Definição de chaves estrangeiras para a tabela "maint", "failures", "error_machine"
+ALTER TABLE maintenance_data.maint ADD CONSTRAINT fk_machine_id FOREIGN KEY (machine_id) REFERENCES maintenance_data.machine(machine_id);
+ALTER TABLE maintenance_data.failures ADD CONSTRAINT fk_machine_id FOREIGN KEY (machineid) REFERENCES maintenance_data.machine(machine_id);
+ALTER TABLE maintenance_data.error_machine ADD CONSTRAINT fk_machine_id FOREIGN KEY (machine_id) REFERENCES maintenance_data.machine(machine_id);
 
--- maint-machine-fk
-alter table maintenance_data.maint 
-add constraint fk_machine_id
-foreign key (machine_id)
-references maintenance_data.machine(machine_id);
-
--- failures-machine-fk
-alter table maintenance_data.failures 
-add constraint fk_machine_id
-foreign key (machineid)
-references maintenance_data.machine(machine_id);
-
--- error_machine-machine-fk
-alter table maintenance_data.error_machine 
-add constraint fk_machine_id
-foreign key (machine_id)
-references maintenance_data.machine(machine_id);
-
--- telemetry
+-- Criação da tabela "telemetry"
 CREATE TABLE maintenance_data.telemetry (
-    telemetry_id serial primary key,
-    machine_id smallint not null,
-    datetime timestamp not null,
-    volt decimal(16, 13) not null,
-    rotate decimal(16, 13)  not null,
-    pressure decimal(16, 13)  not null,
-    vibration decimal(15, 13)  not null
+    telemetry_id SERIAL PRIMARY KEY,
+    machine_id SMALLINT NOT NULL,
+    datetime TIMESTAMP NOT NULL,
+    volt DECIMAL(16, 13) NOT NULL,
+    rotate DECIMAL(16, 13) NOT NULL,
+    pressure DECIMAL(16, 13) NOT NULL,
+    vibration DECIMAL(15, 13) NOT NULL
 );
 
-insert into maintenance_data.telemetry (machine_id, datetime, volt, rotate, pressure, vibration)
-select
-machineid,
-datetime,
-volt,
-rotate,
-pressure,
-vibration
-from
-kaggle.telemetry;
+-- Inserção de dados na tabela "telemetry"
+INSERT INTO maintenance_data.telemetry (machine_id, datetime, volt, rotate, pressure, vibration)
+SELECT
+    machineid,
+    datetime,
+    volt,
+    rotate,
+    pressure,
+    vibration
+FROM kaggle.telemetry;
 
--- telemetry-pk
-alter table maintenance_data.telemetry
-add constraint fk_machine_id
-foreign key (machine_id)
-references maintenance_data.machine(machine_id);
+-- Definição de chave estrangeira para a tabela "telemetry"
+ALTER TABLE maintenance_data.telemetry 
+	ADD CONSTRAINT fk_machine_id FOREIGN KEY (machine_id) REFERENCES maintenance_data.machine(machine_id);
+
+
+
+
+
+
