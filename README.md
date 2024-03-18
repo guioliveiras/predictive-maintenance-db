@@ -2,7 +2,14 @@
 
 ## Sobre o Projeto
 
-Este repositório contém um projeto de modelagem de banco de dados para manutenção preditiva de máquinas. A equipe foi encarregada de criar um modelo Entidade-Relacionamento (ER) e transformá-lo em um modelo físico para o PostgreSQL, com o objetivo de abrigar dados relacionados a condições de uso da máquina, histórico de falhas, histórico de manutenção e características da máquina.
+O "Predictive Maintenance Database" é um projeto de estudo focado na criação de um banco de dados relacional para suportar processos de manutenção preditiva em máquinas industriais. Utilizando dados coletados de sensores e históricos de manutenção, o objetivo é prever falhas e planejar intervenções antes que ocorram paradas não planejadas na produção.
+
+O projeto inclui modelagem de dados seguindo as normas de normalização de bancos de dados (1FN, 2FN e 3FN), implementação física no PostgreSQL e desenvolvimento de consultas SQL para análise preditiva. Além disso, é apresentada uma solução comercial detalhada, destacando os benefícios da abordagem de manutenção preditiva.
+
+Os conjuntos de dados utilizados neste projeto podem ser encontrados no [Kaggle](https://www.kaggle.com), disponíveis para referência e análise.
+
+🔗 [Microsoft Azure Predictive Maintenance](https://www.kaggle.com/datasets/arnabbiswas1/microsoft-azure-predictive-maintenance)
+
 
 ## 🗂️ Estrutura do Projeto
 
@@ -22,7 +29,7 @@ O projeto está organizado da seguinte forma:
 
 ## 📄 Dicionário de Dados
 
-Para melhor compreensão, foi criado dicionário de dados contendo os nomes de todas as tabelas com detalhamento de cada atributo definido.
+Para melhor compreensão, foi criado um dicionário de dados contendo os nomes de todas as tabelas com detalhamento de cada atributo definido.
 
 🔗 [Dicionário](https://github.com/guioliveiras/predictive-maintenance-db/blob/main/docs/dicionario_de_dados.pdf)
 
@@ -44,5 +51,4 @@ Para melhor compreensão, foi criado dicionário de dados contendo os nomes de t
 
 ## Observações
 
-- Os dados utilizados neste projeto foram obtidos do Kaggle e estão disponíveis para referência.
 - Certifique-se de aplicar todas as chaves primárias e estrangeiras corretamente durante a execução dos scripts SQL.
