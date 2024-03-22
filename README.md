@@ -2,14 +2,13 @@
 
 ## Sobre o Projeto
 
-O "Predictive Maintenance Database" é um projeto de estudo focado na criação de um banco de dados relacional para suportar processos de manutenção preditiva em máquinas industriais. Utilizando dados coletados de sensores e históricos de manutenção, o objetivo é prever falhas e planejar intervenções antes que ocorram paradas não planejadas na produção.
+O "Predictive Maintenance Database" é um projeto de estudo focado na criação de um banco de dados relacional para suportar as informações dos processos de manutenção preditiva de máquinas.
 
-O projeto inclui modelagem de dados seguindo as normas de normalização de bancos de dados (1FN, 2FN e 3FN), implementação física no PostgreSQL e desenvolvimento de consultas SQL para análise preditiva. Além disso, é apresentada uma solução comercial detalhada, destacando os benefícios da abordagem de manutenção preditiva.
+O projeto inclui o Modelo Entidade Relacionamento (MER)  seguindo os padrões de normalização de bancos de dados (1FN, 2FN e 3FN), e desenvolvimento de scripts SQL para  implementação física no PostgreSQL.
 
 Os conjuntos de dados utilizados neste projeto podem ser encontrados no [Kaggle](https://www.kaggle.com), disponíveis para referência e análise.
 
 🔗 [Microsoft Azure Predictive Maintenance](https://www.kaggle.com/datasets/arnabbiswas1/microsoft-azure-predictive-maintenance)
-
 
 ## 🗂️ Estrutura do Projeto
 
