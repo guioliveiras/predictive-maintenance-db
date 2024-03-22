@@ -2,8 +2,7 @@
 
 DROP SCHEMA IF EXISTS kaggle CASCADE;
 
-CREATE SCHEMA IF NOT EXISTS kaggle
-    AUTHORIZATION postgres;
+CREATE SCHEMA IF NOT EXISTS kaggle;
 
 -- Criando a tabela 'machines'
 CREATE TABLE kaggle.machines (
@@ -13,7 +12,7 @@ CREATE TABLE kaggle.machines (
 );
 
 -- Criando a tabela 'errors'
-CREATE TABLE kaggle.erros (
+CREATE TABLE kaggle.errors (
 	error_id SERIAL PRIMARY KEY,
 	datetime TIMESTAMP NOT NULL,
 	machineid SMALLINT REFERENCES kaggle.machines(machineid) NOT NULL,

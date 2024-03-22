@@ -2,8 +2,7 @@
 
 DROP SCHEMA IF EXISTS maintenance CASCADE;
 
-CREATE SCHEMA IF NOT EXISTS maintenance
-    AUTHORIZATION postgres;
+CREATE SCHEMA IF NOT EXISTS maintenance;
 
 -- Criação da tabela "components"
 CREATE TABLE maintenance.components (
@@ -20,7 +19,7 @@ CREATE TABLE maintenance.failures AS (
     SELECT 
         failure_id,
         datetime,
-        machineid,
+        machineid AS machine_id,
         c.component_key
     FROM kaggle.failures f 
     LEFT JOIN maintenance.components c ON f.failure = c.component_name
