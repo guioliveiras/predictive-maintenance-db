@@ -40,10 +40,10 @@ CREATE TABLE kaggle.maint (
 CREATE TABLE kaggle.telemetry (
 	datetime TIMESTAMP NOT NULL,
 	machineid SMALLINT REFERENCES kaggle.machines(machineid) NOT NULL,
-	volt FLOAT NOT NULL,
-	rotate FLOAT NOT NULL,
-	pressure FLOAT NOT NULL,
-	vibration FLOAT NOT NULL,
+	volt DOUBLE PRECISION NOT NULL,
+	rotate DOUBLE PRECISION NOT NULL,
+	pressure DOUBLE PRECISION NOT NULL,
+	vibration DOUBLE PRECISION NOT NULL,
 	PRIMARY KEY(machineid, datetime)
 );
 
