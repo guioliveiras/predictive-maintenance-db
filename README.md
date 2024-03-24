@@ -1,10 +1,12 @@
 # Microsoft Azure Predictive Maintenance
 
+![](https://www.python.org/static/community_logos/python-logo-master-v3-TM.png)
+
 ## Sobre o Projeto
 
 O "Predictive Maintenance Database" é um projeto de estudo focado na criação de um banco de dados relacional para suportar as informações dos processos de manutenção preditiva de máquinas.
 
-O projeto inclui o Modelo Entidade Relacionamento (MER)  seguindo os padrões de normalização de bancos de dados (1FN, 2FN e 3FN), e desenvolvimento de scripts SQL para  implementação física no PostgreSQL.
+O projeto inclui o Modelo Entidade Relacionamento (MER) seguindo os padrões de normalização de bancos de dados (1FN, 2FN e 3FN), e desenvolvimento de scripts SQL para  implementação física no PostgreSQL.
 
 Os conjuntos de dados utilizados neste projeto podem ser encontrados no [Kaggle](https://www.kaggle.com), disponíveis para referência e análise.
 
@@ -14,27 +16,19 @@ Os conjuntos de dados utilizados neste projeto podem ser encontrados no [Kaggle]
 
 O projeto está organizado da seguinte forma:
 
-- **docs**: Contém a apresentação comercial detalhando a solução proposta.
-- **sql**: Scripts SQL para criação de tabelas, carga de dados e consultas para análise.
+- **sql**: Scripts SQL para carga de dados e criação de tabelas.
 - **data**: Dados utilizados no projeto, obtidos do Kaggle.
-- **diagrams**: Diagramas de modelo ER e físico do banco de dados.
+- **diagrams**: Modelos ER dos bancos de dados.
 
 ## 📄 Descrição dos Arquivos
 
-- `create_tables.sql`: Script SQL para criação das tabelas no PostgreSQL.
-- `load_data.sql`: Script SQL para carga de dados de exemplo nas tabelas.
-- `queries.sql`: Consultas SQL para análise dos dados.
-- `Apresentacao_comercial.pdf`: Apresentação comercial para a equipe técnica do cliente.
+`create_tables.sql`: Script SQL para criação das tabelas no PostgreSQL.
 
-## 📄 Dicionário de Dados
+`load_data.sql`: Script SQL para carga de dados de  nas tabelas.
 
-Para melhor compreensão, foi criado um dicionário de dados contendo os nomes de todas as tabelas com detalhamento de cada atributo definido.
+## 📄 Descrição das Tabelas
 
-🔗 [Dicionário](https://github.com/guioliveiras/predictive-maintenance-db/blob/main/docs/dicionario_de_dados.pdf)
-
-**Descrição das Tabelas:**
-
-`PdM_telemetry.csv`: Consiste na média horária de tensão, rotação, pressão e vibração coletada de 100 máquinas para o ano de 2015.
+`PdM_telemetry.csv`: Consiste na média horária de tensão, rotação, pressão e vibração coletada de 100 máquinas.
 
 `PdM_errors.csv`: São os erros encontrados pelas máquinas durante o funcionamento.
 
@@ -48,6 +42,12 @@ Para melhor compreensão, foi criado um dicionário de dados contendo os nomes d
 
 [Inserir instruções de instalação, configuração do banco de dados, execução dos scripts, etc.]
 
-## Observações
+## Próximos Passos
 
-- Certifique-se de aplicar todas as chaves primárias e estrangeiras corretamente durante a execução dos scripts SQL.
+- [x] Some task
+- [ ] Some more task
+- [ ] Some more more task
+
+
+
+## Contato
