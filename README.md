@@ -1,6 +1,6 @@
 # Microsoft Azure Predictive Maintenance
 
-![](https://www.python.org/static/community_logos/python-logo-master-v3-TM.png)
+<img src=”https://github.com/guioliveiras/predictive-maintenance-db/blob/main/imgs/maitenance.png”>
 
 ## Sobre o Projeto
 
@@ -47,7 +47,5 @@ O projeto está organizado da seguinte forma:
 - [x] Some task
 - [ ] Some more task
 - [ ] Some more more task
-
-
 
 ## Contato
