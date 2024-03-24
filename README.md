@@ -1,7 +1,7 @@
-# Microsoft Azure Predictive Maintenance
+# Predictive Maintenance Database
 
+![Microsoft Azure Predictive Maintenance](https://github.com/guioliveiras/predictive-maintenance-db/blob/main/imgs/maitenance.png?raw=true)
 
-![Microsoft Azure Predictive Maintenance](https://github.com/guioliveiras/predictive-maintenance-db/blob/main/imgs/maitenance.png?raw=true "Microsoft Azure Predictive Maintenance")
 ## Sobre o Projeto
 
 O "Predictive Maintenance Database" é um projeto de estudo focado na criação de um banco de dados relacional para suportar as informações dos processos de manutenção preditiva de máquinas.
@@ -40,12 +40,42 @@ O projeto está organizado da seguinte forma:
 
 ## Uso
 
-[Inserir instruções de instalação, configuração do banco de dados, execução dos scripts, etc.]
+Para utilizar este projeto, siga estas etapas:
+
+1. Clone o repositório no GitHub com o seguinte comando:
+
+```bash
+git clone https://github.com/guioliveiras/predictive-maintenance-db.git
+cd predictive-maintenance-db
+```
+
+2. Certifique-se de ter o PostgreSQL instalado e em funcionamento.
+
+3. Crie um banco de dados vazio no PostgreSQL ou utilize um de sua escolha.
+
+4. Acesse a pasta `sql` do projeto.
+
+5. Alter o caminho do diretório do COPY no script SQL `load_data.sql` para o onde estão seus arquivos.
+
+6. Execute o script SQL `load_data.sql` para importar os dados dos arquivos CSV.
+
+7. Execute o script SQL `create_tables.sql` para criar as tabelas no banco de dados.
+
+8. Agora você pode fazer consultas e realizar análises nas tabelas do banco de dados.
 
 ## Próximos Passos
 
-- [x] Some task
-- [ ] Some more task
-- [ ] Some more more task
+- [x] Modelagem e nomalização do banco de dados
+- [ ] Análise de dados
 
 ## Contato
+
+<a href="https://www.linkedin.com/in/silvaguilhermeoliveira/" alt="Linkedin">
+<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+
+<a href="mailto:silva.guilhermeoliveira@gmail.com" alt="Gmail">
+<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+
+<a href="https://medium.com/@guioliveiras" alt="Medium">
+<img src="https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white" /></a>
+
