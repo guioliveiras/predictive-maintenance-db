@@ -1,7 +1,7 @@
 # Microsoft Azure Predictive Maintenance
 
-<img src=”https://github.com/guioliveiras/predictive-maintenance-db/blob/main/imgs/maitenance.png”>
 
+![Microsoft Azure Predictive Maintenance](https://github.com/guioliveiras/predictive-maintenance-db/blob/main/imgs/maitenance.png?raw=true "Microsoft Azure Predictive Maintenance")
 ## Sobre o Projeto
 
 O "Predictive Maintenance Database" é um projeto de estudo focado na criação de um banco de dados relacional para suportar as informações dos processos de manutenção preditiva de máquinas.
