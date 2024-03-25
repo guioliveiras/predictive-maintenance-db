@@ -38,30 +38,40 @@ O projeto está organizado da seguinte forma:
 
 `PdM_Machines.csv`: Metadados das máquinas, como tipo de modelo e idade.
 
+## Modelo ER
+
+### Kaggle
+
+![Microsoft Azure Predictive Maintenance](https://github.com/guioliveiras/predictive-maintenance-db/blob/main/diagrams/kaggle_ER.png?raw=true)
+
+### Maintenance - Normalized Database
+
+![Microsoft Azure Predictive Maintenance](https://github.com/guioliveiras/predictive-maintenance-db/blob/main/diagrams/maintenence_ER.png?raw=true)
+
 ## Uso
 
 Para utilizar este projeto, siga estas etapas:
 
-1. Clone o repositório no GitHub com o seguinte comando:
+1.Clone o repositório no GitHub com o seguinte comando:
 
 ```bash
 git clone https://github.com/guioliveiras/predictive-maintenance-db.git
 cd predictive-maintenance-db
 ```
 
-2. Certifique-se de ter o PostgreSQL instalado e em funcionamento.
+2.Certifique-se de ter o PostgreSQL instalado e em funcionamento.
 
-3. Crie um banco de dados vazio no PostgreSQL ou utilize um de sua escolha.
+3.Crie um banco de dados vazio no PostgreSQL ou utilize um de sua escolha.
 
-4. Acesse a pasta `sql` do projeto.
+4.Acesse a pasta `sql` do projeto.
 
-5. Alter o caminho do diretório do COPY no script SQL `load_data.sql` para o onde estão seus arquivos.
+5.Alter o caminho do diretório do COPY no script SQL `load_data.sql` para o onde estão seus arquivos.
 
-6. Execute o script SQL `load_data.sql` para importar os dados dos arquivos CSV.
+6.Execute o script SQL `load_data.sql` para importar os dados dos arquivos CSV.
 
-7. Execute o script SQL `create_tables.sql` para criar as tabelas no banco de dados.
+7.Execute o script SQL `create_tables.sql` para criar as tabelas no banco de dados.
 
-8. Agora você pode fazer consultas e realizar análises nas tabelas do banco de dados.
+8.Agora você pode fazer consultas e realizar análises nas tabelas do banco de dados.
 
 ## Próximos Passos
 
@@ -78,4 +88,3 @@ cd predictive-maintenance-db
 
 <a href="https://medium.com/@guioliveiras" alt="Medium">
 <img src="https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white" /></a>
-
