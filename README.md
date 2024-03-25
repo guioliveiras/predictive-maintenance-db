@@ -48,7 +48,7 @@ O projeto está organizado da seguinte forma:
 
 ![Microsoft Azure Predictive Maintenance](https://github.com/guioliveiras/predictive-maintenance-db/blob/main/diagrams/maintenence_ER.png?raw=true)
 
-## Uso
+## Instruções de Uso
 
 Para utilizar este projeto, siga estas etapas:
 
